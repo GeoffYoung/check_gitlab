@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+if [ $# -ne 1 ]; then
+    printf "Usage: $0 [Health Check URL]"
+    exit
+fi
+
+
+# Responses
+E_SUCCESS="0"
+E_WARNING="1"
+E_CRITICAL="2"
+E_UNKNOWN="3"
+
+CURL=`which curl`
+EXPECTED="success"
+URL=$1
+
+
+if [ -z "${CURL}" ]
+then
+    echo "UNKNOWN - Cannot find Curl"
+    exit ${E_UNKNOWN}
+fi
+
+
+RESPONSE="${CURL} -s ${URL}"
+
+if [ "$RESPONSE" == "$EXPECTED" ]; then
+    echo "OK - $1 working"
+    exit ${E_SUCCESS}
+    else
+    echo "CRITICAL - $1 not working"
+    exit ${E_CRITICAL}
+fi
