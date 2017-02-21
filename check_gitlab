@@ -24,8 +24,7 @@ then
     exit ${E_UNKNOWN}
 fi
 
-
-RESPONSE="${CURL} -s ${URL}"
+RESPONSE=`${CURL} -s ${URL}`
 
 if [ "$RESPONSE" == "$EXPECTED" ]; then
     echo "OK - $1 working"
