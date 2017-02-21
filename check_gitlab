@@ -1,17 +1,18 @@
 #!/bin/bash
 
 
-if [ $# -ne 1 ]; then
-    printf "Usage: $0 [Health Check URL]"
-    exit
-fi
-
-
 # Responses
 E_SUCCESS="0"
 E_WARNING="1"
 E_CRITICAL="2"
 E_UNKNOWN="3"
+
+
+if [ $# -ne 1 ]; then
+    printf "Usage: $0 [Health Check URL]"
+    exit ${E_UNKNOWN}
+fi
+
 
 CURL=`which curl`
 EXPECTED="success"
@@ -33,3 +34,4 @@ if [ "$RESPONSE" == "$EXPECTED" ]; then
     echo "CRITICAL - $1 not working"
     exit ${E_CRITICAL}
 fi
+
