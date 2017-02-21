@@ -28,10 +28,10 @@ fi
 RESPONSE=`${CURL} -s ${URL}`
 
 if [ "$RESPONSE" == "$EXPECTED" ]; then
-    echo "OK - $1 working"
+    echo "OK - Response was \"$RESPONSE\""
     exit ${E_SUCCESS}
     else
-    echo "CRITICAL - $1 not working"
+    echo "CRITICAL - Response was \"$RESPONSE\""
     exit ${E_CRITICAL}
 fi
 
